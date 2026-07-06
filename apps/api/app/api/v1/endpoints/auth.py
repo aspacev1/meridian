@@ -21,6 +21,19 @@ def _initials(first_name: str | None, last_name: str | None, email: str) -> str:
     return email[:2].upper()
 
 
+@router.get("/login-url")
+async def login_url() -> dict:
+    """Builds the WorkOS AuthKit authorization URL. Kept server-side so the
+    SPA doesn't have to duplicate WorkOS's URL-construction rules -- it just
+    redirects the browser to whatever this returns.
+    """
+    url = _workos.user_management.get_authorization_url(
+        provider="authkit",
+        redirect_uri=settings.workos_redirect_uri,
+    )
+    return {"url": url}
+
+
 @router.get("/callback")
 async def auth_callback(code: str, session: AsyncSession = Depends(get_unscoped_db)) -> dict:
     """WorkOS AuthKit redirects here with a one-time `code` after login/SSO.

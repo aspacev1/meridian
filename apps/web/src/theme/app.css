@@ -1,0 +1,94 @@
+/* App-level additions on top of the ported prototype CSS -- there was no
+   login screen or org switcher in the original single-file prototype, so
+   these are new, styled to match the existing MD3 tokens. */
+
+/* The prototype used <div onclick> for nav items; react-router's NavLink
+   renders <a>, so reset link defaults to match the original look exactly. */
+.ni {
+  text-decoration: none;
+}
+.ni-label {
+  text-decoration: none;
+}
+
+.auth-screen {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--md-surface);
+}
+
+.auth-card {
+  background: var(--md-surface-1);
+  border-radius: var(--shape-lg);
+  box-shadow: var(--elev-2);
+  padding: 40px 36px;
+  width: 320px;
+  text-align: center;
+}
+
+.auth-logo {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  border-radius: var(--shape-md);
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.auth-card h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.auth-card p {
+  color: var(--fog3);
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.org-switcher {
+  position: relative;
+  margin-left: 8px;
+}
+
+.org-switcher select {
+  font-family: var(--md);
+  font-size: 12.5px;
+  background: var(--md-surface-1);
+  color: var(--fog);
+  border: 1px solid var(--rule);
+  border-radius: var(--shape-xs);
+  padding: 6px 10px;
+}
+
+.placeholder-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--fog3);
+  padding: 40px;
+  text-align: center;
+}
+
+.placeholder-page h2 {
+  color: var(--fog);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.state-message {
+  padding: 40px;
+  text-align: center;
+  color: var(--fog3);
+}
