@@ -11,6 +11,11 @@ class Settings(BaseSettings):
 
     anthropic_api_key: str = ""
 
+    # Symmetric key (Fernet, urlsafe-base64 32 bytes) used to encrypt
+    # data_source_connections.encrypted_config at rest. Interim
+    # implementation -- see app/services/secrets.py for the swap-to-KMS note.
+    secrets_encryption_key: str = ""
+
     workos_api_key: str = ""
     workos_client_id: str = ""
     workos_cookie_password: str = ""

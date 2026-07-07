@@ -13,3 +13,16 @@ export function useOrgFetch() {
     return apiFetch<T>(path, { token, orgId: currentOrgId });
   };
 }
+
+/** Same as useOrgFetch, but for mutations (POST/PUT/DELETE) -- for use as a
+ * react-query mutationFn. */
+export function useOrgMutate() {
+  const { token, currentOrgId } = useAuth();
+
+  return function orgMutate<T>(path: string, method: string, body?: unknown): Promise<T> {
+    if (!token || !currentOrgId) {
+      return Promise.reject(new Error("Not authenticated"));
+    }
+    return apiFetch<T>(path, { token, orgId: currentOrgId, method, body });
+  };
+}

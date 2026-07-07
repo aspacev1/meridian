@@ -63,3 +63,55 @@ export interface CatalogReport {
   last_run_at: string | null;
   current_status: "go" | "warn" | "stop";
 }
+
+export type ConnectionKind = "openmetadata" | "greenplum" | "local_disk";
+
+export interface Connection {
+  id: string;
+  kind: ConnectionKind;
+  name: string;
+  status: "pending" | "connected" | "error";
+  last_checked_error: string | null;
+}
+
+export interface ConnectionTestResult {
+  status: "connected" | "error";
+  detail: string;
+}
+
+export interface ConnectionFieldSpec {
+  key: string;
+  label: string;
+  type: "text" | "password" | "number";
+  placeholder?: string;
+  defaultValue?: string;
+}
+
+export const CONNECTION_KIND_FIELDS: Record<ConnectionKind, ConnectionFieldSpec[]> = {
+  openmetadata: [
+    { key: "host_url", label: "Host URL", type: "text", placeholder: "https://openmetadata.acme.internal:8585" },
+    { key: "api_token", label: "API token (bot JWT)", type: "password" },
+  ],
+  greenplum: [
+    { key: "host", label: "Host", type: "text", placeholder: "gpdb.acme.internal" },
+    { key: "port", label: "Port", type: "number", defaultValue: "5432" },
+    { key: "database", label: "Database", type: "text" },
+    { key: "username", label: "Username", type: "text" },
+    { key: "password", label: "Password", type: "password" },
+    { key: "sslmode", label: "SSL mode", type: "text", defaultValue: "prefer" },
+  ],
+  local_disk: [
+    {
+      key: "path",
+      label: "Directory path",
+      type: "text",
+      placeholder: "/data/etl-exports/acme",
+    },
+  ],
+};
+
+export const CONNECTION_KIND_LABELS: Record<ConnectionKind, string> = {
+  openmetadata: "OpenMetadata",
+  greenplum: "Greenplum",
+  local_disk: "Local disk (Linux server path)",
+};

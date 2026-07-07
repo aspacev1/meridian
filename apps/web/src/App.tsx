@@ -6,6 +6,7 @@ import { AuthCallbackPage } from "@/routes/AuthCallbackPage";
 import { NoOrgPage } from "@/routes/NoOrgPage";
 import { DashboardPage } from "@/routes/DashboardPage";
 import { CatalogPage } from "@/routes/CatalogPage";
+import { SettingsPage } from "@/routes/SettingsPage";
 import { PlaceholderPage } from "@/routes/PlaceholderPage";
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
@@ -49,15 +50,7 @@ export function App() {
             />
           }
         />
-        <Route
-          path="/settings"
-          element={
-            <PlaceholderPage
-              title="Settings"
-              note="Coming in a later phase — mart registration and connector management."
-            />
-          }
-        />
+        <Route path="/settings" element={<SettingsPage />} />
         <Route
           path="/executive"
           element={
